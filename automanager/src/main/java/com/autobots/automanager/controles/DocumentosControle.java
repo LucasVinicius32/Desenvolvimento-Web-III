@@ -14,7 +14,6 @@ import com.autobots.automanager.entidades.Cliente;
 import com.autobots.automanager.entidades.Documento;
 
 import com.autobots.automanager.modelo.Documentos.DocumentoAtualizador;
-import com.autobots.automanager.modelo.Documentos.DocumentoCreate;
 import com.autobots.automanager.modelo.Documentos.DocumentoSelecionador;
 import com.autobots.automanager.repositorios.ClienteRepositorio;
 import com.autobots.automanager.repositorios.DocumentoRepositorio;
@@ -27,39 +26,34 @@ public class DocumentosControle {
 	private DocumentoRepositorio repositorioDocumento;
 	@Autowired
 	private DocumentoSelecionador selecionador;
-	@Autowired
-	private DocumentoCreate criador;
 
-	
-
-
-	@GetMapping("/documento/{id}") // funciona
+	@GetMapping("/documento/{id}") 
 	public Documento obterDocumento(@PathVariable long id) {
 		List<Documento> documentos = repositorioDocumento.findAll();
 		return selecionador.selecionar(documentos, id);
 	}
 
-	@GetMapping("/documentos") // funciona
+	@GetMapping("/documentos") 
 	public List<Documento> obterDocumentos() {
 		List<Documento> documentos = repositorioDocumento.findAll();
 		return documentos;
 	}
 
-	@PostMapping("/cadastroDocumentos") // funciona
+	@PostMapping("/cadastroDocumentos") 
 	public void cadastrarDocumentos(@RequestBody Cliente cliente) {
 		Cliente cliente2 = repositorio.getById(cliente.getId());
 		cliente2.getDocumentos().addAll(cliente.getDocumentos());
 		repositorio.save(cliente2);
 	} 
 
-	@PutMapping("/atualizarDocumentos") // funciona
+	@PutMapping("/atualizarDocumentos") 
 	public void atualizarDocumentos(@RequestBody Cliente atualizacao) {
         Cliente cliente = repositorio.getById(atualizacao.getId());
         DocumentoAtualizador atualizador = new DocumentoAtualizador();
         atualizador.atualizar(cliente.getDocumentos(), atualizacao.getDocumentos());
         repositorio.save(cliente);
 	}
-	@DeleteMapping("/excluirDocumento/{id}") // funciona
+	@DeleteMapping("/excluirDocumento/{id}") 
 	public void excluirDocumento(@PathVariable long id) {
 		Documento documento = repositorioDocumento.getById(id);
 		Cliente cliente = repositorio.findByDocumentosId(id);

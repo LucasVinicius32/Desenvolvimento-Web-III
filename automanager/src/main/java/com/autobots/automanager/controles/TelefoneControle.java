@@ -9,21 +9,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.autobots.automanager.entidades.Cliente;
-import com.autobots.automanager.entidades.Documento;
-import com.autobots.automanager.entidades.Endereco;
 import com.autobots.automanager.entidades.Telefone;
-import com.autobots.automanager.modelo.Documentos.DocumentoAtualizador;
-import com.autobots.automanager.modelo.Documentos.DocumentoCreate;
-import com.autobots.automanager.modelo.Documentos.DocumentoSelecionador;
-import com.autobots.automanager.modelo.Endereco.EnderecoAtualizador;
-import com.autobots.automanager.modelo.Endereco.EnderecoSelecionador;
 import com.autobots.automanager.modelo.Telefone.TelefoneAtualizador;
 import com.autobots.automanager.modelo.Telefone.TelefoneSelecionador;
 import com.autobots.automanager.repositorios.ClienteRepositorio;
-import com.autobots.automanager.repositorios.DocumentoRepositorio;
-import com.autobots.automanager.repositorios.EnderecoRepositorio;
 import com.autobots.automanager.repositorios.TelefoneRepositorio;
 
 @RestController
@@ -37,20 +27,20 @@ public class TelefoneControle {
 
 
 	
-	@GetMapping("/telefone/{id}") // funciona
+	@GetMapping("/telefone/{id}") 
 	public Telefone obterEndereco(@PathVariable long id) {
 		List<Telefone> telefone = repositorioTelefone.findAll();
 		return selecionador.selecionar(telefone, id);
 	}
 
 
-	@GetMapping("/telefones") // funciona
+	@GetMapping("/telefones") 
 	public List<Telefone> obterTelefone() {
 		List<Telefone> telefone = repositorioTelefone.findAll();
 		return telefone;
 	}
 
-	@PostMapping("/cadastroTelefone") // funciona
+	@PostMapping("/cadastroTelefone") 
 	public void cadastrarDocumentos(@RequestBody Cliente cliente) {
 		Cliente cliente2 = repositorioCliente.getById(cliente.getId());
 		cliente2.getTelefones().addAll(cliente.getTelefones());
@@ -58,7 +48,7 @@ public class TelefoneControle {
 		
 	} 
 
-	@PutMapping("/atualizarTelefone") // funciona
+	@PutMapping("/atualizarTelefone") 
 	public void atualizarDocumentos(@RequestBody Cliente atualizacao) {
         Cliente cliente = repositorioCliente.getById(atualizacao.getId());
         TelefoneAtualizador atualizador = new TelefoneAtualizador();
@@ -66,7 +56,7 @@ public class TelefoneControle {
         repositorioCliente.save(cliente);
 	}
 
-	@DeleteMapping("/excluirTelefone/{id}") // funciona
+	@DeleteMapping("/excluirTelefone/{id}") 
 	public void excluirDocumento(@PathVariable long id) {
 		Telefone telefone = repositorioTelefone.getById(id);
 		Cliente cliente = repositorioCliente.findByTelefonesId(id);
