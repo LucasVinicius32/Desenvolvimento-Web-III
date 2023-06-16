@@ -51,6 +51,16 @@ public class AutomanagerApplication implements CommandLineRunner {
 
 		empresa.setEndereco(enderecoEmpresa);
 
+		Endereco enderecoEmpresa2 = new Endereco();
+		enderecoEmpresa.setEstado("SP");
+		enderecoEmpresa.setCidade("Loanda");
+		enderecoEmpresa.setBairro("Novao");
+		enderecoEmpresa.setRua("Av rua grande");
+		enderecoEmpresa.setNumero("21");
+		enderecoEmpresa.setCodigoPostal("2212112-000");
+
+		empresa.setEndereco(enderecoEmpresa2);
+
 		Telefone telefoneEmpresa = new Telefone();
 		telefoneEmpresa.setDdd("011");
 		telefoneEmpresa.setNumero("986454527");
